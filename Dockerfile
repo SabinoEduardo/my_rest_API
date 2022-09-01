@@ -1,0 +1,3 @@
+FROM Python:3.9.5
+WORKDIR /code
+COPY
