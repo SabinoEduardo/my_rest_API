@@ -2,10 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_link_products():
+def get_link_products(page):
+    """
+    :param page: O número página do site open food.
+    :return: lista com links dos produtos ou mensagem de erro se o site open food estiver fora do ar.
+    """
     try:
-        url = 'https://world.openfoodfacts.org/'
-        page_html = requests.get(url)
+        url = f'https://world.openfoodfacts.org/'
+        page_html = requests.get(url+str(page))
         content_html = BeautifulSoup(page_html.text, 'html.parser')
         list_links_product = list()
         for product in content_html.select('.row ul.products'):
@@ -18,7 +22,7 @@ def get_link_products():
 
 
 if __name__ == '__main__':
-    links = get_link_products()
+    links = get_link_products(2)
     if isinstance(links, list):
         for number, link in enumerate(links):
             print(f'Produto {number+1}: {link}')

@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'DB_product_scraping',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }  # Para integração do banco de dados com o Django usou-se o driver mysqlclient

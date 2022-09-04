@@ -23,6 +23,9 @@ def list_products(request):
      :return: retorna os produtos do banco de dados por páginas
     """
     products = Produto.objects.all()
+    if not len(products):
+        msg = {'Mensagem': 'Lista de Produtos está vazia'}
+        return Response(msg['Mensagem'], status=status.HTTP_204_NO_CONTENT)
     paginator = Paginator(products, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

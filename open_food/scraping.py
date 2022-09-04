@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from open_food import request
+import request
 
 
 class Dados:
@@ -25,15 +25,17 @@ class Dados:
         o banco de dados.
     """
 
-    def __init__(self):
-        self.urls = request.get_link_products()
+    def __init__(self, page):
+        self.urls = request.get_link_products(page)
         self.products_dict = dict()
         self.len_lista = len(self.products_dict)
         self.quantity = None
         self.content_html = None
 
     def products(self):
-
+        """
+        :return: retorna um dicionário com 100 produtos resultados do scraping do site open food
+        """
         if self.len_lista < 100:
             self.products_dict[f'{self.len_lista}'] = {}
             url = self.urls[self.len_lista]
@@ -46,9 +48,10 @@ class Dados:
     def get_code(self):
         """
             Função para pegar o valor do código do produto (Valor inteiro)
+            :return: Sem retorno
         """
         try:
-            code = self.content_html.select_one('#barcode')
+            code = self.content_html.select_one('span#barcode')
             code = int(code.text)
             self.products_dict[f'{self.len_lista}']['code'] = code
         except AttributeError:
@@ -58,7 +61,7 @@ class Dados:
     def get_barcode(self):
         """
             Função para acessar o Código de Barras do Produto
-            :return:
+            :return: Sem retorno
         """
         try:
             value_barcode = self.content_html.select_one('#barcode_paragraph')
@@ -71,7 +74,7 @@ class Dados:
     def get_quantity(self):
         """
             Função para acessar a quantidade do produto, dependendo do produto poder massa ou volume.
-            :return:
+            :return: Sem retorno
         """
         try:
             self.quantity = self.content_html.select_one('#field_quantity_value')
@@ -83,7 +86,7 @@ class Dados:
     def config_name(self):
         """
             Função para acessar o Nome do Produto
-            :return:
+            :return: Sem retorno
         """
         try:
             extense_name = self.content_html.select_one('[itemscope] h1')
@@ -97,7 +100,7 @@ class Dados:
     def get_categories(self):
         """
             Função para acessar a Categoria  na qual o produto pertence
-            :return:
+            :return: Sem retorno
         """
         try:
             categories = self.content_html.select_one('.field_value#field_categories_value')
@@ -109,7 +112,7 @@ class Dados:
     def get_packaging(self):
         """
             Função para acessar as informações sobre a embalagem do produto
-            :return:
+            :return: Sem retorno
         """
         try:
             packaging = self.content_html.select_one('.field_value#field_packaging_value')
@@ -121,7 +124,7 @@ class Dados:
     def get_brands(self):
         """
             Função para acessar a Marca do Produto
-            :return:
+            :return: Sem retorno
 
         """
         try:
@@ -134,7 +137,7 @@ class Dados:
     def get_image_url(self):
         """
             Função para acessar a Marca do Produto
-            :return:
+            :return: Sem retorno
 
         """
         try:
@@ -143,14 +146,15 @@ class Dados:
             self.products_dict[f'{self.len_lista}']['image_url'] = img_url
         except TypeError:
             self.products_dict[f'{self.len_lista}']['image_url'] = "Null"
+        print(self.len_lista + 1)
+        print(self.products_dict[f'{self.len_lista}'])
         self.len_lista += 1
-        self.products()
 
 
 if __name__ == '__main__':
-    products = Dados()
+    products = Dados(1)
     for id_product, product in products.products().items():
         print(f'Produto {int(id_product) + 1}')
-        for k, value in product.items():
-            print(f'{k}: {value}')
+        for key, value in product.items():
+            print(f'{key}: {value}')
         print()
