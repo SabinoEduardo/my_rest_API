@@ -31,7 +31,6 @@ def insert_into(product):
     :return: função sem retorno
     """
     for id_product, product in product.products().items():
-        print(product)
         try:
             sql = 'INSERT INTO open_food_produto (code, barcode, status, imported_t, url, product_name, ' \
                   'quantity, categories, packaging, brands, image_url) ' \

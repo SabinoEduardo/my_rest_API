@@ -91,7 +91,7 @@ class Dados:
         try:
             extense_name = self.content_html.select_one('[itemscope] h1')
             extense_name = str(extense_name.text)
-            name = extense_name.replace(f' - {self.quantity}', '')
+            name = extense_name.replace(f' - {self.quantity.text}', '')
             self.products_dict[f'{self.len_lista}']['product_name'] = name
         except AttributeError:
             self.products_dict[f'{self.len_lista}']['product_name'] = "Null"
@@ -146,9 +146,8 @@ class Dados:
             self.products_dict[f'{self.len_lista}']['image_url'] = img_url
         except TypeError:
             self.products_dict[f'{self.len_lista}']['image_url'] = "Null"
-        print(self.len_lista + 1)
-        print(self.products_dict[f'{self.len_lista}'])
         self.len_lista += 1
+        self.products()
 
 
 if __name__ == '__main__':
