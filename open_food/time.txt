@@ -1,0 +1,8 @@
+Synchronization number: 1
+  Synchronization Date: 2022/09/24 04:14:45 PM
+  The sync lasted 2 minutes
+
+Synchronization number: 2
+  Synchronization Date: 2022/09/24 04:18:55 PM
+  The sync lasted 2 minutes
+
