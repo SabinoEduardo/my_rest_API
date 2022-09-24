@@ -1,11 +1,10 @@
 from django.contrib import admin
-from open_food.models import Produto
+from open_food.models import Product
 
-# Criando uma representação do meu modelo para a inteface de administração do Django
-# O django possui por padrão um interface de administração
+# Admin site
 
 
-class Produtos(admin.ModelAdmin):
+class Products(admin.ModelAdmin):
     list_display = (
 
                     "code", "barcode", "status", "imported_t", "url",
@@ -15,4 +14,4 @@ class Produtos(admin.ModelAdmin):
                 )
 
 
-admin.site.register(Produto, Produtos)
+admin.site.register(Product, Products)

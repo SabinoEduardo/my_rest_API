@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from open_food.models import Produto
+from open_food.models import Product
 
 
-class ProdutoSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     """
-        Class Serializer, pega todos os  campos do modelo do banco de dados exceto o id.
+        Class Serializer to chance the date for Json.
     """
     class Meta:
-        model = Produto
+        model = Product
         exclude = ['id']

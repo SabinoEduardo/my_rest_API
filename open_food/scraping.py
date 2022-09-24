@@ -3,26 +3,25 @@ from bs4 import BeautifulSoup
 import request
 
 
-class Dados:
+class Date:
     """
-        Classe com todos o métodos para acessar as informações de cada produto na página.
-        Aplicando recursividade, a cada chamada dos médotos será adicionado um produto na
-        lista de produtos (dicionário) com as seguintes informações:
+        class with all methods to acess the data of products
+        Apply recursivity, every time that to call the methods this class will be added a profuct in
+        dictionário of products with the information:
 
-            :Código : int
-            :Código de Barra : str
-            :Quantidade : str
-            :Nome : str
-            :Categoria : str
-            :Embalagem : str
-            :Marca : str
+            :Code : int
+            :Barcode : str
+            :quantity : str
+            :name : str
+            :categories : str
+            :packaging : str
+            :brands : str
 
-        Uma função chama a outra até ser coletada todas as informações necessárias do produto.
-        As funções serão chamadas até o sistema percorrer todas as páginas dos produtos.
+        A funtion call other funtion to get all information of product.
+        The funtions will be called until the system to get all products for page.
 
-        Usando uma estrutura condicional, deficiu-se o limite de 100 produtos a serem coletados na página.
-        Significa que mesmo o sistema pegar mais de 100 prodtos, apenas 100 produtos serão sincronizados para
-        o banco de dados.
+        Using a conditional structure, will set a limit of 100 products to been colected for page.
+
     """
 
     def __init__(self, page):
@@ -34,7 +33,7 @@ class Dados:
 
     def products(self):
         """
-        :return: retorna um dicionário com 100 produtos resultados do scraping do site open food
+        :return: a dictionary with 100 products
         """
         if self.len_lista < 100:
             self.products_dict[f'{self.len_lista}'] = {}
@@ -47,8 +46,8 @@ class Dados:
 
     def get_code(self):
         """
-            Função para pegar o valor do código do produto (Valor inteiro)
-            :return: Sem retorno
+            Function to get the code value of product
+            :return: without return
         """
         try:
             code = self.content_html.select_one('span#barcode')
@@ -60,8 +59,8 @@ class Dados:
 
     def get_barcode(self):
         """
-            Função para acessar o Código de Barras do Produto
-            :return: Sem retorno
+            Function to get the barcode of product
+            :return: without return
         """
         try:
             value_barcode = self.content_html.select_one('#barcode_paragraph')
@@ -73,8 +72,8 @@ class Dados:
 
     def get_quantity(self):
         """
-            Função para acessar a quantidade do produto, dependendo do produto poder massa ou volume.
-            :return: Sem retorno
+            Function to get the quantity of product.
+            :return: without return
         """
         try:
             self.quantity = self.content_html.select_one('#field_quantity_value')
@@ -85,8 +84,8 @@ class Dados:
 
     def config_name(self):
         """
-            Função para acessar o Nome do Produto
-            :return: Sem retorno
+            Function to get the name of product.
+            :return: without return
         """
         try:
             extense_name = self.content_html.select_one('[itemscope] h1')
@@ -99,8 +98,8 @@ class Dados:
 
     def get_categories(self):
         """
-            Função para acessar a Categoria  na qual o produto pertence
-            :return: Sem retorno
+            Function to get the categories of product.
+            :return: without return
         """
         try:
             categories = self.content_html.select_one('.field_value#field_categories_value')
@@ -111,8 +110,8 @@ class Dados:
 
     def get_packaging(self):
         """
-            Função para acessar as informações sobre a embalagem do produto
-            :return: Sem retorno
+            Function to get the packaging of product.
+            :return: without return
         """
         try:
             packaging = self.content_html.select_one('.field_value#field_packaging_value')
@@ -123,8 +122,8 @@ class Dados:
 
     def get_brands(self):
         """
-            Função para acessar a Marca do Produto
-            :return: Sem retorno
+            Function to get the brand of product.
+            :return: without return
 
         """
         try:
@@ -136,8 +135,8 @@ class Dados:
 
     def get_image_url(self):
         """
-            Função para acessar a Marca do Produto
-            :return: Sem retorno
+            Function to get the image url of product.
+            :return: without return
 
         """
         try:
@@ -150,8 +149,9 @@ class Dados:
         self.products()
 
 
+# to test
 if __name__ == '__main__':
-    products = Dados(2)
+    products = Date(2)
     for id_product, product in products.products().items():
         print(f'Produto {int(id_product) + 1}')
         for key, value in product.items():

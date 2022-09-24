@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 
 def get_link_products(page):
     """
-    :param page: O número página do site open food.
-    :return: lista com links dos produtos ou mensagem de erro se o site open food estiver fora do ar.
+    :param page: the number page of site open food.
+    :return: The list with links the products or error message if the site open food is out.
     """
     try:
         url = f'https://world.openfoodfacts.org/'

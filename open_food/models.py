@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Produto(models.Model):
+class Product(models.Model):
     """
         Modelo da minha aplicação.
         : values_choices: As duas opções para o Status do produto

@@ -1,5 +1,5 @@
 import pymysql.cursors
-from scraping import Dados
+from scraping import Date
 from datetime import datetime
 from contextlib import contextmanager
 
@@ -7,7 +7,7 @@ from contextlib import contextmanager
 @contextmanager
 def conect_db():
     """
-    Conectando ao banco de dados
+        Connect to the Database
     """
     conexao = pymysql.connect(
         host='127.0.0.1',
@@ -26,9 +26,9 @@ def conect_db():
 
 def insert_into(products):
     """
-    Esta função serve para inserir os produtos no banco de dados.
-    :param products: instância da classe Dados
-    :return: função sem retorno
+    This Function is used to insert the products to the Database
+    :param products: instance of class Dates
+    :return: funtion without return
     """
     for id_product, prod in products.items():
         try:
@@ -48,10 +48,10 @@ def insert_into(products):
             pass
 
 
-with conect_db() as con:
-    with con.cursor() as cursor:
-        cursor.execute('SELECT * FROM open_food_produto')
-        numbers_product = len(cursor.fetchall())
-        page_site = int(numbers_product/100) + 1
-        product = Dados(page_site)
+with conect_db() as con:  # To call the function connect_db to open the connection with database
+    with con.cursor() as cursor:  # To start the cursor
+        cursor.execute('SELECT * FROM open_food_produto')  # To get all products of database
+        quantity_of_product = len(cursor.fetchall())  # To calculate how much products exist in database
+        page_site = int(quantity_of_product/100) + 1
+        product = Date(page_site)
         insert_into(product.products())
