@@ -13,17 +13,17 @@ class Produto(models.Model):
         ('imported', 'imported')
     ]
 
-    code = models.BigIntegerField(unique=True, null=False)
+    code = models.BigIntegerField(null=False, default=0)
     barcode = models.CharField(max_length=35)
     status = models.CharField(max_length=10, choices=values_choices)
     imported_t = models.DateTimeField(auto_now=False, auto_now_add=True)
-    url = models.CharField(max_length=60)
-    product_name = models.CharField(max_length=50)
-    quantity = models.CharField(max_length=15)
-    categories = models.CharField(max_length=100)
-    packaging = models.CharField(max_length=100)
-    brands = models.CharField(max_length=100)
-    image_url = models.CharField(max_length=150)
+    url = models.CharField(max_length=100)
+    product_name = models.CharField(max_length=100)
+    quantity = models.CharField(max_length=20)
+    categories = models.CharField(max_length=350)
+    packaging = models.CharField(max_length=350)
+    brands = models.CharField(max_length=300)
+    image_url = models.CharField(max_length=20)
 
     def __str__(self):
         """

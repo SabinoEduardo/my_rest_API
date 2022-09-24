@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 
 @api_view()
-def mensagem(self):
+def message(self):
     """
 
     :param self:

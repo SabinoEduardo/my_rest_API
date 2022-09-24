@@ -86,7 +86,7 @@ WSGI_APPLICATION = "my_project.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DB_product_scraping',
+        'NAME': 'DB_product_Scraping',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

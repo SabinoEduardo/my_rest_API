@@ -13,7 +13,7 @@ def conect_db():
         host='127.0.0.1',
         user='root',
         password='',
-        db='DB_product_scraping',
+        db='DB_product_Scraping',
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor
     )
@@ -24,23 +24,23 @@ def conect_db():
         conexao.close()
 
 
-def insert_into(product):
+def insert_into(products):
     """
     Esta função serve para inserir os produtos no banco de dados.
-    :param product: instância da classe Dados
+    :param products: instância da classe Dados
     :return: função sem retorno
     """
-    for id_product, product in product.products().items():
+    for id_product, prod in products.items():
         try:
             sql = 'INSERT INTO open_food_produto (code, barcode, status, imported_t, url, product_name, ' \
                   'quantity, categories, packaging, brands, image_url) ' \
                   'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
             cursor.execute(
-                            sql, (product['code'], product['barcode'], 'imported', f'{datetime.now()}',
-                                  product['url'], product['product_name'], product['quantity'],
-                                  product['categories'], product['packaging'], product['brands'],
-                                  product['image_url'])
+                            sql, (prod['code'], prod['barcode'], 'imported', f'{datetime.now()}',
+                                  prod['url'], prod['product_name'], prod['quantity'],
+                                  prod['categories'], prod['packaging'], prod['brands'],
+                                  prod['image_url'])
                         )
 
             con.commit()
@@ -48,33 +48,10 @@ def insert_into(product):
             pass
 
 
-def select_all_and_compare(product, page):
-    """
-    Função para verificar se os produtos a serem sincronizados já existem no banco de dados. Se já existem, o sistema
-    vai realizar nova raspagem do site.
-
-    :param product: objeto da classe Dados
-    :param page: o número da página do site openfood
-    :return: Essa função tem retorno
-    """
-    list_key = list()
-    cursor.execute('SELECT * FROM open_food_produto')
-    for linha in cursor.fetchall():
-        for key, value in product.products().items():
-            if linha['code'] == value['code']:
-                list_key.append(key)
-    if list_key:
-        for key in list_key:
-            del product.products()[key]
-        if not product.products():
-            page += 1
-            product = Dados(page)
-            select_all_and_compare(product, page)
-    insert_into(product)
-
-
 with conect_db() as con:
-    page_site = 1
-    products = Dados(page_site)
     with con.cursor() as cursor:
-        select_all_and_compare(products, page_site)
+        cursor.execute('SELECT * FROM open_food_produto')
+        numbers_product = len(cursor.fetchall())
+        page_site = int(numbers_product/100) + 1
+        product = Dados(page_site)
+        insert_into(product.products())

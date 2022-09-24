@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from open_food.views import mensagem, list_products, get_product
+from open_food.views import message, list_products, get_product
 
 """
     As urls de acordo com o que será solicitado.
@@ -8,8 +8,8 @@ from open_food.views import mensagem, list_products, get_product
 """
 
 urlpatterns = [
-    path('', mensagem),
-    path('admin/', admin.site.urls),
-    path('products/<int:code>', get_product, name='get_product'),
+    path('', message),
     path('products/', list_products),
+    path('products/<int:code>', get_product, name='get_product'),
+    path('admin/', admin.site.urls),
 ]

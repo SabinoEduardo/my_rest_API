@@ -55,7 +55,7 @@ class Dados:
             code = int(code.text)
             self.products_dict[f'{self.len_lista}']['code'] = code
         except AttributeError:
-            self.products_dict[f'{self.len_lista}']['code'] = "Null"
+            self.products_dict[f'{self.len_lista}']['code'] = 0
         self.get_barcode()
 
     def get_barcode(self):
@@ -151,7 +151,7 @@ class Dados:
 
 
 if __name__ == '__main__':
-    products = Dados(1)
+    products = Dados(2)
     for id_product, product in products.products().items():
         print(f'Produto {int(id_product) + 1}')
         for key, value in product.items():
