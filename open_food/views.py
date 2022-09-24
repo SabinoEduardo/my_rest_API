@@ -9,7 +9,6 @@ from django.core.paginator import Paginator
 @api_view()
 def message(self):
     """
-
     :param self:
     :return: This funtion return the message "Fullstack Challenge 20201026" and status code 200
     """
@@ -24,8 +23,7 @@ def list_products(request):
     """
     products = Product.objects.all()
     if not len(products):
-        msg = {'Mensagem': 'Lista de Produtos está vazia'}
-        return Response(msg['Mensagem'], status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT)
     paginator = Paginator(products, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -36,11 +34,9 @@ def list_products(request):
 @api_view()
 def get_product(self, code):
     """
-
     :param self:
     :param code: code of product to be seached in database
     :return: product referent the informed code that be in database
-
     """
     self.product = Product.objects.filter(code=code)
     if not len(self.product):

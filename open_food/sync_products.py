@@ -54,4 +54,14 @@ with conect_db() as con:  # To call the function connect_db to open the connecti
         quantity_of_product = len(cursor.fetchall())  # To calculate how much products exist in database
         page_site = int(quantity_of_product/100) + 1
         product = Date(page_site)
-        insert_into(product.products())
+        with open('time.txt', 'a') as f:
+            time1 = datetime.now().minute
+            insert_into(product.products())
+            time2 = datetime.now().minute
+            time = time2 - time1
+            date = datetime.now().strftime('%Y/%m/%d %I:%M:%S %p')
+            f.write(f'Synchronization number: {page_site}\n')
+            f.write(f'  Synchronization Date: {date}\n')
+            f.write(f'  The sync lasted {time} minutes\n')
+            f.write('\n')
+            f.seek(0)
