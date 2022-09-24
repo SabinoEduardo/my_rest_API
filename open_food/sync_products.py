@@ -32,7 +32,7 @@ def insert_into(products):
     """
     for id_product, prod in products.items():
         try:
-            sql = 'INSERT INTO open_food_produto (code, barcode, status, imported_t, url, product_name, ' \
+            sql = 'INSERT INTO open_food_product (code, barcode, status, imported_t, url, product_name, ' \
                   'quantity, categories, packaging, brands, image_url) ' \
                   'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
@@ -50,7 +50,7 @@ def insert_into(products):
 
 with conect_db() as con:  # To call the function connect_db to open the connection with database
     with con.cursor() as cursor:  # To start the cursor
-        cursor.execute('SELECT * FROM open_food_produto')  # To get all products of database
+        cursor.execute('SELECT * FROM open_food_product')  # To get all products of database
         quantity_of_product = len(cursor.fetchall())  # To calculate how much products exist in database
         page_site = int(quantity_of_product/100) + 1
         product = Date(page_site)
