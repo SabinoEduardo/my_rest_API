@@ -21,14 +21,22 @@ def list_products(request):
     """
      :return: 10 products of database for page.
     """
-    products = Product.objects.all()
-    if not len(products):
-        return Response(status=status.HTTP_204_NO_CONTENT)
-    paginator = Paginator(products, 10)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    product_serializer = ProductSerializer(page_obj, many=True)
-    return Response(product_serializer.data)
+    if request.method == 'GET':
+        products = Product.objects.all()
+        if not len(products):
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        paginator = Paginator(products, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        product_serializer = ProductSerializer(page_obj, many=True)
+        return Response(product_serializer.data)
+
+    elif request.method == 'POST':
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view()
