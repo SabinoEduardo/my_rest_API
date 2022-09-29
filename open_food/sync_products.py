@@ -17,7 +17,6 @@ def conect_db():
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor
     )
-
     try:
         yield conexao
     finally:
@@ -42,7 +41,6 @@ def insert_into(products):
                                   prod['categories'], prod['packaging'], prod['brands'],
                                   prod['image_url'])
                         )
-
             con.commit()
         except pymysql.err.IntegrityError:
             pass

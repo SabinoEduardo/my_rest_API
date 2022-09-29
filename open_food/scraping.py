@@ -64,7 +64,7 @@ class Date:
         """
         try:
             value_barcode = self.content_html.select_one('#barcode_paragraph')
-            barcode = str(value_barcode.text).replace('Barcode: ', '').strip()
+            barcode = (str(value_barcode.text).replace('Barcode: ', '').strip()).replace(' ', '')
             self.products_dict[f'{self.len_lista}']['barcode'] = barcode
         except AttributeError:
             self.products_dict[f'{self.len_lista}']['barcode'] = "Null"
@@ -90,7 +90,7 @@ class Date:
         try:
             extense_name = self.content_html.select_one('[itemscope] h1')
             extense_name = str(extense_name.text)
-            name = extense_name.replace(f' - {self.quantity.text}', '')
+            name = extense_name.replace(f'{self.quantity.text}', '')
             self.products_dict[f'{self.len_lista}']['product_name'] = name
         except AttributeError:
             self.products_dict[f'{self.len_lista}']['product_name'] = "Null"
@@ -151,7 +151,7 @@ class Date:
 
 # to test
 if __name__ == '__main__':
-    products = Date(2)
+    products = Date(1)
     for id_product, product in products.products().items():
         print(f'Produto {int(id_product) + 1}')
         for key, value in product.items():

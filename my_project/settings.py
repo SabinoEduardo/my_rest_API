@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "open_food",
     "rest_framework",
     "requests",
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +87,7 @@ WSGI_APPLICATION = "my_project.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DB_product_Scraping',
+        'NAME': 'db_product_scraping',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
