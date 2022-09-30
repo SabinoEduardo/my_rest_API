@@ -55,7 +55,7 @@ with conect_db() as con:  # To call the function connect_db to open the connecti
         page_site = int(quantity_of_product_in_db/100) + 1
         with open('log.txt', 'a') as f:
             time1 = datetime.now().minute
-            quantity_of_product_to_scraping = 10
+            quantity_of_product_to_scraping = 100
             product = Date(page_site, quantity_of_product_to_scraping)
             insert_into(product.products())
             time2 = datetime.now().minute
