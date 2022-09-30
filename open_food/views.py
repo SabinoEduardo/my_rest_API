@@ -25,10 +25,10 @@ def list_products(request):
         products = Product.objects.all()
         if not len(products):
             return Response(status=status.HTTP_204_NO_CONTENT)
-        paginator = Paginator(products, 10)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        product_serializer = ProductSerializer(page_obj, many=True)
+        # paginator = Paginator(products, 10)
+        # page_number = request.GET.get('page')
+        # page_obj = paginator.get_page(page_number)
+        product_serializer = ProductSerializer(products, many=True)
         return Response(product_serializer.data)
 
 

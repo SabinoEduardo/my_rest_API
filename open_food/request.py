@@ -18,7 +18,8 @@ def get_link_products(page):
                     list_links_product.append(url + str(p.attrs['href']))
         return list_links_product
     except ConnectionError as error:
-        return error
+        with open('log.txt', 'a') as f:
+            f.write(str(error))
 
 
 if __name__ == '__main__':

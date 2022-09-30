@@ -35,30 +35,34 @@ def insert_into(products):
                   'quantity, categories, packaging, brands, image_url) ' \
                   'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
+            import_t = datetime.now()
             cursor.execute(
-                            sql, (prod['code'], prod['barcode'], 'imported', f'{datetime.now()}',
+                            sql, (prod['code'], prod['barcode'], 'imported', f'{import_t}',
                                   prod['url'], prod['product_name'], prod['quantity'],
                                   prod['categories'], prod['packaging'], prod['brands'],
                                   prod['image_url'])
                         )
             con.commit()
-        except pymysql.err.IntegrityError:
-            pass
+        except pymysql.err.IntegrityError as error:
+            with open('log.txt', 'a') as file:
+                file.write(str(error))
 
 
 with conect_db() as con:  # To call the function connect_db to open the connection with database
     with con.cursor() as cursor:  # To start the cursor
         cursor.execute('SELECT * FROM open_food_product')  # To get all products of database
-        quantity_of_product = len(cursor.fetchall())  # To calculate how much products exist in database
-        page_site = int(quantity_of_product/100) + 1
-        product = Date(page_site)
-        with open('time.txt', 'a') as f:
+        quantity_of_product_in_db = len(cursor.fetchall())  # To calculate how much products exist in database
+        page_site = int(quantity_of_product_in_db/100) + 1
+        with open('log.txt', 'a') as f:
             time1 = datetime.now().minute
+            quantity_of_product_to_scraping = 10
+            product = Date(page_site, quantity_of_product_to_scraping)
             insert_into(product.products())
             time2 = datetime.now().minute
-            time = time2 - time1
             date = datetime.now().strftime('%Y/%m/%d %I:%M:%S %p')
+            time = time2 - time1
             f.write(f'Synchronization number: {page_site}\n')
+            f.write(f'  Sincronização realizada com sucesso!\n')
             f.write(f'  Synchronization Date: {date}\n')
             f.write(f'  The sync lasted {time} minutes\n')
             f.write('\n')

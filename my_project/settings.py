@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "requests",
     'django_filters',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -92,6 +93,9 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
+        'OPTIONS': {
+                    'sql_mode': 'traditional',
+                },
     }
 }  # Para integração do banco de dados com o Django usou-se o driver mysqlclient
 

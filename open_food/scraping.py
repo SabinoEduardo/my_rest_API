@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import request
+from open_food import request
 
 
 class Date:
@@ -24,7 +24,8 @@ class Date:
 
     """
 
-    def __init__(self, page):
+    def __init__(self, page, quantity):
+        self.quantity_of_products = quantity
         self.urls = request.get_link_products(page)
         self.products_dict = dict()
         self.len_lista = len(self.products_dict)
@@ -35,13 +36,17 @@ class Date:
         """
         :return: a dictionary with 100 products
         """
-        if self.len_lista < 100:
+        if self.len_lista < self.quantity_of_products:
             self.products_dict[f'{self.len_lista}'] = {}
             url = self.urls[self.len_lista]
             self.products_dict[f'{self.len_lista}']['url'] = url
-            page_html = requests.get(f'{url}')
-            self.content_html = BeautifulSoup(page_html.content, 'html.parser')
-            self.get_code()
+            try:
+                page_html = requests.get(f'{url}')
+                self.content_html = BeautifulSoup(page_html.content, 'html.parser')
+                self.get_code()
+            except ConnectionError as error:
+                with open('log.txt', 'a') as f:
+                    f.write(str(error))
         return self.products_dict
 
     def get_code(self):
@@ -89,8 +94,8 @@ class Date:
         """
         try:
             extense_name = self.content_html.select_one('[itemscope] h1')
-            extense_name = str(extense_name.text)
-            name = extense_name.replace(f'{self.quantity.text}', '')
+            extense_name = (str(extense_name.text)).strip()
+            name = extense_name.replace(f' - {self.quantity.text}', '')
             self.products_dict[f'{self.len_lista}']['product_name'] = name
         except AttributeError:
             self.products_dict[f'{self.len_lista}']['product_name'] = "Null"
@@ -151,7 +156,7 @@ class Date:
 
 # to test
 if __name__ == '__main__':
-    products = Date(1)
+    products = Date(1, 2)
     for id_product, product in products.products().items():
         print(f'Produto {int(id_product) + 1}')
         for key, value in product.items():
