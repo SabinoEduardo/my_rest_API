@@ -1,0 +1,15 @@
+Synchronization number: 1
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/09/29 04:21:07 PM
+  The sync lasted 4 minutes
+
+Synchronization number: 2
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/09/29 04:30:23 PM
+  The sync lasted 3 minutes
+
+Synchronization number: 3
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/09/29 04:40:29 PM
+  The sync lasted 3 minutes
+
