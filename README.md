@@ -36,6 +36,7 @@ Os endpoints são:
 - `GET /`: Retornar um Status: 200 e uma Mensagem "Fullstack Challenge 20201026"
 - `GET /products/:code`: Obter a informação somente de um produto;
 - `GET /products`: Listar todos os produtos da base de dados, utilizar o sistema de paginação para não sobrecarregar a `REQUEST`.
+- `GET /documentations`: Página de documentação.
 
 Foi utilizado o sistema de Paginação para exibir na interface da API 10 produtos por página. Para exibir outras páginas informa o seguinte caminho: http://127.0.0.1:8000/products/?page=numero_da_pagina
 
