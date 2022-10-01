@@ -8,7 +8,7 @@ def get_link_products(page):
     :return: The list with links the products or error message if the site open food is out.
     """
     try:
-        url = f'https://world.openfoodfacts.org/'
+        url = 'https://world.openfoodfacts.org/'
         page_html = requests.get(url+str(page))
         content_html = BeautifulSoup(page_html.text, 'html.parser')
         list_links_product = list()
