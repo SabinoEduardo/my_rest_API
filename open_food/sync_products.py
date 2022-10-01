@@ -1,6 +1,6 @@
-import pymysql.cursors
 from scraping import Date
 from datetime import datetime
+import pymysql.cursors
 from contextlib import contextmanager
 
 
@@ -23,9 +23,11 @@ def conect_db():
         conexao.close()
 
 
-def insert_into(products):
+def insert_into(products, con, cursor):
     """
     This Function is used to insert the products to the Database
+    :param con:
+    :param cursor:
     :param products: instance of class Dates
     :return: funtion without return
     """
@@ -43,27 +45,25 @@ def insert_into(products):
                                   prod['image_url'])
                         )
             con.commit()
+
         except pymysql.err.IntegrityError as error:
             with open('log.txt', 'a') as file:
                 file.write(str(error))
+                return error
 
 
-with conect_db() as con:  # To call the function connect_db to open the connection with database
-    with con.cursor() as cursor:  # To start the cursor
-        cursor.execute('SELECT * FROM open_food_product')  # To get all products of database
-        quantity_of_product_in_db = len(cursor.fetchall())  # To calculate how much products exist in database
-        page_site = int(quantity_of_product_in_db/100) + 1
-        with open('log.txt', 'a') as f:
-            time1 = datetime.now().minute
-            quantity_of_product_to_scraping = 100
-            product = Date(page_site, quantity_of_product_to_scraping)
-            insert_into(product.products())
-            time2 = datetime.now().minute
-            date = datetime.now().strftime('%Y/%m/%d %I:%M:%S %p')
-            time = time2 - time1
-            f.write(f'Synchronization number: {page_site}\n')
-            f.write(f'  Sincronização realizada com sucesso!\n')
-            f.write(f'  Synchronization Date: {date}\n')
-            f.write(f'  The sync lasted {time} minutes\n')
-            f.write('\n')
-            f.seek(0)
+def log_txt(number_sync, con, cursor):
+    with open('log.txt', 'a') as f:
+        time1 = datetime.now().minute
+        quantity_of_product_to_scraping = 100
+        product = Date(number_sync, quantity_of_product_to_scraping)
+        insert_into(product.products(), con, cursor)
+        time2 = datetime.now().minute
+        date = datetime.now().strftime('%Y/%m/%d %I:%M:%S %p')
+        time = time2 - time1
+        f.write(f'Synchronization number: {number_sync}\n')
+        f.write(f'  Sincronização realizada com sucesso!\n')
+        f.write(f'  Synchronization Date: {date}\n')
+        f.write(f'  The sync lasted {time} minutes\n')
+        f.write('\n')
+        f.seek(0)

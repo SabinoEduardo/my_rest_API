@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from open_food.views import message, list_products, get_product
+from open_food.views import message, list_of_products, get_one_product
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -28,9 +28,9 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('', message, name='Message'),
-    path('products/', list_products, name='Products'),
-    path('products/<int:code>', get_product, name='GET_Products'),
+    path('products/', list_of_products, name='Products'),
+    path('products/<int:code>', get_one_product, name='GET_Products'),
     path('admin/', admin.site.urls),
     path('documentation/', schema_view.with_ui('swagger', cache_timeout=0), name='scraping_documentation'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    # path('documentation/', schema_view.with_ui('redoc', cache_timeout=0), name='scraping_documentation'),
 ]

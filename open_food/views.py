@@ -17,7 +17,7 @@ def message(self):
 
 
 @api_view()
-def list_products(request):
+def list_of_products(request):
     """
      :return: 10 products of database for page.
     """
@@ -25,15 +25,15 @@ def list_products(request):
         products = Product.objects.all()
         if not len(products):
             return Response(status=status.HTTP_204_NO_CONTENT)
-        # paginator = Paginator(products, 10)
-        # page_number = request.GET.get('page')
-        # page_obj = paginator.get_page(page_number)
-        product_serializer = ProductSerializer(products, many=True)
+        paginator = Paginator(products, 10)
+        page_number = request.GET.get('page')
+        page_of_obj = paginator.get_page(page_number)
+        product_serializer = ProductSerializer(page_of_obj, many=True)
         return Response(product_serializer.data)
 
 
 @api_view()
-def get_product(self, code):
+def get_one_product(self, code):
     """
     :param self:
     :param code: code of product to be seached in database
