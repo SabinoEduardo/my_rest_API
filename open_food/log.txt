@@ -8,3 +8,28 @@ Synchronization number: 2
   Synchronization Date: 2022/09/30 03:39:30 PM
   The sync lasted 3 minutes
 
+Synchronization number: 3
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/10/01 06:19:55 PM
+  The sync lasted 3 minutes
+
+Synchronization number: 4
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/10/03 04:33:48 PM
+  The sync lasted 2 minutes
+
+Synchronization number: 5
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/10/04 12:28:07 PM
+  The sync lasted 4 minutes
+
+Synchronization number: 6
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/10/04 01:15:43 PM
+  The sync lasted 3 minutes
+
+Synchronization number: 7
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/10/04 01:56:32 PM
+  The sync lasted 3 minutes
+
