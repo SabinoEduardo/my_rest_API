@@ -36,18 +36,23 @@ class Date:
         """
         :return: a dictionary with 100 products
         """
-        if self.len_lista < self.quantity_of_products:
-            self.products_dict[f'{self.len_lista}'] = {}
-            url = self.urls[self.len_lista]
-            self.products_dict[f'{self.len_lista}']['url'] = url
-            try:
-                page_html = requests.get(f'{url}')
-                self.content_html = BeautifulSoup(page_html.content, 'html.parser')
-                self.get_code()
-            except ConnectionError as error:
-                with open('log.txt', 'a') as f:
-                    f.write(str(error))
-        return self.products_dict
+        try:
+            if self.len_lista < self.quantity_of_products:
+                self.products_dict[f'{self.len_lista}'] = {}
+                url = self.urls[self.len_lista]
+                self.products_dict[f'{self.len_lista}']['url'] = url
+                try:
+                    page_html = requests.get(f'{url}')
+                    self.content_html = BeautifulSoup(page_html.content, 'html.parser')
+                    self.get_code()
+                except requests.ConnectionError as error:
+                    with open('log.txt', 'a') as f:
+                        f.write(f'{str(error)}\n')
+        except TypeError as error:
+            with open('log.txt', 'a') as f:
+                f.write(str(error))
+        else:
+            return self.products_dict
 
     def get_code(self):
         """

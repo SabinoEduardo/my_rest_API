@@ -31,25 +31,32 @@ def insert_into(products, con, cursor):
     :param products: instance of class Dates
     :return: funtion without return
     """
-    for id_product, prod in products.items():
-        try:
-            sql = 'INSERT INTO open_food_product (code, barcode, status, imported_t, url, product_name, ' \
-                  'quantity, categories, packaging, brands, image_url) ' \
-                  'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+    try:
+        for id_product, prod in products.items():
+            try:
+                sql = 'INSERT INTO open_food_product (code, barcode, status, imported_t, url, product_name, ' \
+                      'quantity, categories, packaging, brands, image_url) ' \
+                      'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
-            import_t = datetime.now()
-            cursor.execute(
-                            sql, (prod['code'], prod['barcode'], 'imported', f'{import_t}',
-                                  prod['url'], prod['product_name'], prod['quantity'],
-                                  prod['categories'], prod['packaging'], prod['brands'],
-                                  prod['image_url'])
-                        )
-            con.commit()
+                import_t = datetime.now()
+                cursor.execute(
+                                sql, (prod['code'], prod['barcode'], 'imported', f'{import_t}',
+                                      prod['url'], prod['product_name'], prod['quantity'],
+                                      prod['categories'], prod['packaging'], prod['brands'],
+                                      prod['image_url'])
+                            )
+                con.commit()
 
-        except pymysql.err.IntegrityError as error:
-            with open('log.txt', 'a') as file:
-                file.write(str(error))
-                return error
+            except pymysql.err.IntegrityError as error:
+                with open('log.txt', 'a') as file:
+                    file.write(f'{str(error)}\n')
+                    return False
+        return True
+    except AttributeError as error:
+        with open('log.txt', 'a') as f:
+            f.write(f'{str(error)}\n')
+            f.write('\n')
+            return False
 
 
 def log_txt(number_sync, con, cursor):
@@ -57,13 +64,16 @@ def log_txt(number_sync, con, cursor):
         time1 = datetime.now().minute
         quantity_of_product_to_scraping = 100
         product = Date(number_sync, quantity_of_product_to_scraping)
-        insert_into(product.products(), con, cursor)
-        time2 = datetime.now().minute
-        date = datetime.now().strftime('%Y/%m/%d %I:%M:%S %p')
-        time = time2 - time1
-        f.write(f'Synchronization number: {number_sync}\n')
-        f.write(f'  Sincronização realizada com sucesso!\n')
-        f.write(f'  Synchronization Date: {date}\n')
-        f.write(f'  The sync lasted {time} minutes\n')
-        f.write('\n')
-        f.seek(0)
+        insert = insert_into(product.products(), con, cursor)
+        if insert:
+            time2 = datetime.now().minute
+            date = datetime.now().strftime('%Y/%m/%d %I:%M:%S %p')
+            time = time2 - time1
+            f.write(f'Synchronization number: {number_sync}\n')
+            f.write(f'  Sincronização realizada com sucesso!\n')
+            f.write(f'  Synchronization Date: {date}\n')
+            f.write(f'  The sync lasted {time} minutes\n')
+            f.write('\n')
+            f.seek(0)
+        else:
+            return

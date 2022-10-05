@@ -1,5 +1,6 @@
 from rest_framework import status
 from rest_framework.response import Response
+from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 from .models import Product
 from .serializer import ProductSerializer
@@ -16,13 +17,13 @@ def message(self):
     return Response(self.content["message"], status=status.HTTP_200_OK)
 
 
-@api_view()
+@api_view(['GET', 'POST'])
 def list_of_products(request):
     """
      :return: 10 products of database for page.
     """
     if request.method == 'GET':
-        products = Product.objects.all()
+        products = Product.objects.all().order_by('code')
         if not len(products):
             return Response(status=status.HTTP_204_NO_CONTENT)
         paginator = Paginator(products, 10)

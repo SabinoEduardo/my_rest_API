@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 
 def get_link_products(page):
@@ -17,9 +18,13 @@ def get_link_products(page):
                 if 'href' in p.attrs:
                     list_links_product.append(url + str(p.attrs['href']))
         return list_links_product
-    except ConnectionError as error:
+    except requests.exceptions.ConnectionError as error:
         with open('log.txt', 'a') as f:
-            f.write(str(error))
+            date = datetime.now().strftime('%Y/%m/%d %I:%M:%S %p')
+            f.write(f'{str(date)}\n')
+            f.write(f'ERROR: {str(error)}\n')
+            f.write('\n')
+        return
 
 
 if __name__ == '__main__':
