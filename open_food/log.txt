@@ -18,3 +18,8 @@ Synchronization number: 4
   Synchronization Date: 2022/10/05 03:56:11 PM
   The sync lasted 3 minutes
 
+Synchronization number: 5
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/10/05 04:34:04 PM
+  The sync lasted 3 minutes
+
