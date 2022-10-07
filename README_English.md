@@ -19,16 +19,22 @@ The update system performs a daily scraping of the page [Open Food Facts](https:
 
 ### Run the program
 
+Functions were written in python to test the 3 API endpoints.
+
 All tests were done in a development environment.
 
 To run the program it is necessary to have pycharm or Vscode and Ptyhon3 installed on the machine. All libraries are stored in the virtual environment, so it is not necessary to install them again.
 
-The main focus in building the program was the backend, not the frontend.
+The requirements.txt file has all the libraries used in project development.
 
-To update (synchronize) the products in the database it is necessary to run the sync_products.py file. Before running, make sure the virtual environment is active.
+The main focus in building the program was the backend.
+
+To update (synchronize) the products in the database it is necessary to run the main.py file. Before running, make sure that the virtual environment is active and that the server is connected.
+
+In development, wampserver was used as a server to connect the database.
 
 To view product information in the API, follow these steps:
-- Run the following line in the terminal in the terminal: python manage.py runserver
+- Run in the terminal the following line in the terminal: py manage.py runserver
 - Access the service at http://127.0.0.1:8000/
 - Display pages according to endpoints
 
