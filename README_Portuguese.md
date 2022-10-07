@@ -19,16 +19,22 @@ O sistema de atualização realiza um scraping diário na página [Open Food Fac
 
 ### Rodar o programa
 
+Foi escrito funções em python para testar os 3 endpoints da API.
+
 Todos os testes foram feitos em ambiente de desenvolvimento.
 
 Para rodar o programa é necessário ter o pycharm ou Vscode e o Ptyhon3 instalado instalado na máquina. Todas a bibliotecas estão armazenadas no ambinete virtual, sendo assim não é necessário instala-los novamente.
 
-O principal foco na construção do programa foi o backend, não teve foco no frontend. 
+O arquivo requirements.txt tem todos as bibliotecas usadas no desenvonvilmento de projeto.
 
-Para atualizar (sincronizar) os produtos no banco de dados é necessário rodar o arquivo sync_products.py. Antes de rodar, certifique-se que o ambiente virtual está ativo.
+O principal foco na construção do programa foi o backend. 
+
+Para atualizar (sincronizar) os produtos no banco de dados é necessário rodar o arquivo main.py. Antes de rodar, certifique-se que o ambiente virtual está ativo e que o tem o servidor conectado. 
+
+No desenvolvimento foi usado o wampserver como servidor para conectar o banco de dados.
 
 Para vizualizar as informações dos produtos na API é necessário seguir os seguintes passos:
-- Rodar no trminal a segunite linha no terminal: python manage.py runserver
+- Rodar no trminal a seguinte linha no terminal: py manage.py runserver
 - Acessar o serviço em  http://127.0.0.1:8000/
 - Exibir as páginas de acordo com os endpoints
 
