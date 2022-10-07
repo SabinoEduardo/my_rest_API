@@ -34,5 +34,13 @@ Synchronization number: 7
   Synchronization Date: 2022/10/07 10:29:17 AM
   The sync lasted 3 minutes
 
-=======
->>>>>>> 821367313b0f33d0f9bcb5bb812ff145c45ec891
+Synchronization number: 8
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/10/07 10:59:46 AM
+  The sync lasted 3 minutes
+
+Synchronization number: 9
+  Sincronização realizada com sucesso!
+  Synchronization Date: 2022/10/07 11:15:47 AM
+  The sync lasted 4 minutes
+

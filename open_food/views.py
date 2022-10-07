@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 
 @api_view()
-def message(self):
+def message(self) -> object:
     """
     :param self:
     :return: This funtion return the message "Fullstack Challenge 20201026" and status code 200
@@ -17,7 +17,7 @@ def message(self):
 
 
 @api_view()
-def list_of_products(request):
+def list_of_products(request) -> object:
     """
      :return: 10 products of database for page.
     """
@@ -33,7 +33,7 @@ def list_of_products(request):
 
 
 @api_view()
-def get_one_product(self, code):
+def get_one_product(self, code) -> object:
     """
     :param self:
     :param code: code of product to be seached in database

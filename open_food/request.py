@@ -8,11 +8,12 @@ def get_link_products(page):
     :param page: the number page of site open food.
     :return: The list with links the products or error message if the site open food is out.
     """
+    list_links_product = list()
     try:
         url = 'https://world.openfoodfacts.org/'
         page_html = requests.get(url+str(page))
         content_html = BeautifulSoup(page_html.text, 'html.parser')
-        list_links_product = list()
+
         for product in content_html.select('.row ul.products'):
             for p in product.select('a'):
                 if 'href' in p.attrs:
@@ -25,7 +26,6 @@ def get_link_products(page):
             f.write(f'ERROR: {str(error)}\n')
             f.write('\n')
         return
-
 
 if __name__ == '__main__':
     links = get_link_products(2)

@@ -32,7 +32,7 @@ class Date:
         self.quantity = None
         self.content_html = None
 
-    def products(self):
+    def products(self) -> dict:
         """
         :return: a dictionary with 100 products
         """

@@ -23,7 +23,7 @@ def conect_db():
         conexao.close()
 
 
-def insert_into(products, con, cursor):
+def insert_into(products, con, cursor) -> bool:
     """
     This Function is used to insert the products to the Database
     :param con:
