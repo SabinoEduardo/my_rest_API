@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from open_food import request
+from open_food_app import request
 
 
 class Date:

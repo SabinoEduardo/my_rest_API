@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from open_food.models import Product
+from open_food_app.models import Product
 
 
 class ProductSerializer(serializers.ModelSerializer):

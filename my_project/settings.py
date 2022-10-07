@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "open_food",
+    "open_food_app",
     "rest_framework",
     "requests",
     'django_filters',

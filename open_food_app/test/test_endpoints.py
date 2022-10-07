@@ -1,8 +1,8 @@
 from rest_framework.test import APITestCase
-from open_food.models import Product
+from open_food_app.models import Product
 from rest_framework import status
 from datetime import datetime
-from open_food.scraping import Date
+from open_food_app.scraping import Date
 from random import randint
 
 

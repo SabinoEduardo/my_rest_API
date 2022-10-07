@@ -1,4 +1,4 @@
-from open_food.sync_products import (conect_db, log_txt)
+from open_food_app.sync_products import (conect_db, log_txt)
 
 
 with conect_db() as con:  # To call the function connect_db to open the connection with database

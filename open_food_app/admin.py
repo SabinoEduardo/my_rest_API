@@ -1,5 +1,5 @@
 from django.contrib import admin
-from open_food.models import Product
+from open_food_app.models import Product
 
 # Admin site
 
