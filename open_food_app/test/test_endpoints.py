@@ -1,3 +1,4 @@
+# coding=utf-8
 from rest_framework.test import APITestCase
 from open_food_app.models import Product
 from rest_framework import status

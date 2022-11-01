@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.contrib import admin
 from django.urls import path
 from open_food_app.views import message, list_of_products, get_one_product

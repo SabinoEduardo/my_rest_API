@@ -1,3 +1,4 @@
+# coding=utf-8
 from open_food_app.sync_products import (conect_db, log_txt)
 
 

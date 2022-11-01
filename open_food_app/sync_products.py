@@ -1,3 +1,4 @@
+# coding=utf-8
 from scraping import Date
 from datetime import datetime
 import pymysql.cursors

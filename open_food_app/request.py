@@ -1,3 +1,4 @@
+# coding=utf-8
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -26,6 +27,7 @@ def get_link_products(page):
             f.write(f'ERROR: {str(error)}\n')
             f.write('\n')
         return
+
 
 if __name__ == '__main__':
     links = get_link_products(2)
